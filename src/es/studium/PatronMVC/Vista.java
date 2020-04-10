@@ -5,6 +5,7 @@ import java.awt.Choice;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -45,59 +46,92 @@ public class Vista extends WindowAdapter {
 	Label lblConsultar =new Label("Empleados");	
 	Label lblModificar =new Label("Rellene los campos Empleado");	
 	Label lblBorrar =new Label("Seleccione Empleado");
-	Label lblNombre = new Label ("Nombre");
-	Label lblEmpleado = new Label ("Número");
-	Label lblDepartamento = new Label ("Departamento");
-	Label lblExtension = new Label ("Extensión");
-	Label lblFechaNac = new Label ("Fecha Nac.");
-	Label lblFechaIng = new Label ("Ingresos");
-	Label lblSalario = new Label ("Salario");
-	Label lblComision = new Label ("Comisión");
-	Label lblHijos = new Label ("Hijos");
+	
+	//Etiquetas Nuevo
+	Label lblNombreNuevo = new Label ("Nombre Empleado:");
+	Label lblEmpleadoNuevo = new Label ("Número Empleado:");
+	Label lblDepartamentoNuevo = new Label ("Departamento:");
+	Label lblExtensionNuevo = new Label ("Extensión:");
+	Label lblFechaNacNuevo = new Label ("Fecha Nac.:");
+	Label lblFechaIngNuevo = new Label ("Ingresos:");
+	Label lblSalarioNuevo = new Label ("Salario:");
+	Label lblComisionNuevo = new Label ("Comisión:");
+	Label lblHijosNuevo = new Label ("Hijos:");
+	
+	//Etiquetas Modificar
+	
+	Label lblNombreModificar = new Label ("Nombre");
+	Label lblEmpleadoModificar = new Label ("Número");
+	Label lblDepartamentoModificar = new Label ("Departamento");
+	Label lblExtensionModificar = new Label ("Extensión");
+	Label lblFechaNacModificar = new Label ("Fecha Nac.");
+	Label lblFechaIngModificar = new Label ("Ingresos");
+	Label lblSalarioModificar = new Label ("Salario");
+	Label lblComisionModificar = new Label ("Comisión");
+	Label lblHijosModificar = new Label ("Hijos");
 	
 	
-	//Creamos los campos de texto
+	//Creamos los campos de texto NuevoEmpleado
 	
 	
-	TextField txtNombre = new TextField ("Nombre");
-	TextField txtEmpleado = new TextField ("Número");
+	TextField txtNombreNuevo = new TextField ("",20);
+	TextField txtEmpleadoNuevo = new TextField ("",20);
 	
-	TextField txtExtension = new TextField ("Extensión");
-	TextField txtFechaNac = new TextField ("Fecha Nac.");
-	TextField txtFechaIng = new TextField ("Ingresos");
-	TextField txtSalario = new TextField ("Salario");
-	TextField txtComision = new TextField ("Comisión");
-	TextField txtHijos = new TextField ("Hijos");
+	TextField txtExtensionNuevo = new TextField ("",20);
+	TextField txtFechaNacNuevo = new TextField ("",20);
+	TextField txtFechaIngNuevo = new TextField ("",20);
+	TextField txtSalarioNuevo = new TextField ("",20);
+	TextField txtComisionNuevo = new TextField ("",20);
+	TextField txtHijosNuevo = new TextField ("",20);
 	
-	Choice listaEmpleados = new Choice();
-	Choice listaDepartamento = new Choice ();
+	//Objetos Choice
+		//nuevo
+	Choice listaEmpleadosNuevo = new Choice();
+	Choice listaDepartamentosNuevo = new Choice();
+		//eliminar
+	Choice listaEmpleadosEliminar = new Choice();
+	Choice listaDepartamentoNuevo = new Choice ();
+		//modificar
+	Choice listaEmpleadosModificar = new Choice();
+	Choice listaDepartamentoModificar = new Choice ();
+
+	//Creamos los campos de texto NuevoEmpleado
 	
-	TextField txtCrear = new TextField(3);
-	TextField txtConsultar = new TextField(3);
-	TextField txtModificar = new TextField(3);
+	
+	TextField txtNombreModificar = new TextField ("",20);
+	TextField txtEmpleadoModificar = new TextField ("",20);
+	
+	TextField txtExtensionModificar = new TextField ("",20);
+	TextField txtFechaNacModificar = new TextField ("",20);
+	TextField txtFechaIngModificar = new TextField ("",20);
+	TextField txtSalarioModificar = new TextField ("",20);
+	TextField txtComisionModificar = new TextField ("",20);
+	TextField txtHijosModificar = new TextField ("",20);
 	
 	
-	TextField txtResultadoCrear = new TextField(3);
-	TextField txtResultadoConsultar = new TextField(3);
-	TextField txtResultadoModificar = new TextField(3);
-	TextField txtResultadoEliminar = new TextField(3);
+
+	
+	
+	
 	
 	//Creamos los objetos botón 
 	
-	Button btnCrear = new Button("");
-	Button btnConsultar = new Button("");
-	Button btnModificar = new Button("");
-	Button btnEliminar = new Button("");
-	Button btnCancelar = new Button("");
-	
+	Button btnCrear = new Button("Aceptar");
+	Button btnConsultar = new Button("Aceptar");
+	Button btnModificar = new Button("Aceptar");
+	Button btnEliminar = new Button("Aceptar");
+	Button btnCancelarNuevo = new Button("Cancelar");
+	Button btnCancelarEliminar = new Button("Cancelar");
+	Button btnCancelarModificar = new Button("Cancelar");
+	Button btnCancelarConsultar = new Button("Cancelar");
 	
 	public Vista() {
 		
 		frmEmpresa.setLayout(new FlowLayout());
-		frmEmpresa.setTitle("Nuevo");
+		frmEmpresa.setTitle("Menú Empleados");
 		
 		frmEmpresa.setLocationRelativeTo(null);
-		frmEmpresa.setSize(300, 200);
+		frmEmpresa.setSize(275, 150);
 		frmEmpresa.setResizable(false);
 		frmEmpresa.setVisible(true);
 		
@@ -112,76 +146,74 @@ public class Vista extends WindowAdapter {
 		
 		//Creamos interfaz ventana NuevoEmpleado
 		
-		dlgNuevo.setLayout (new FlowLayout());
+		dlgNuevo.setLayout (new GridLayout(9, 2));
 		dlgNuevo.setTitle("Crear nuevo empleado");
-		dlgNuevo.setSize(300,250);
+		dlgNuevo.setSize(275,250);
 		dlgNuevo.setLocationRelativeTo(null);
 		dlgNuevo.setResizable(false);
 		dlgNuevo.setVisible(false);
-		dlgNuevo.add(lblEmpleado);
-		dlgNuevo.add(txtEmpleado);
-		dlgNuevo.add(lblDepartamento);
-		dlgNuevo.add(listaDepartamento);
-		dlgNuevo.add(lblExtension);
-		dlgNuevo.add(txtExtension);
-		dlgNuevo.add(lblFechaNac);
-		dlgNuevo.add(txtFechaIng);
-		dlgNuevo.add(lblSalario);
-		dlgNuevo.add(txtSalario);
-		dlgNuevo.add(lblComision);
-		dlgNuevo.add(txtComision);
-		dlgNuevo.add(lblHijos);
-		dlgNuevo.add(txtHijos);
-		dlgNuevo.add(lblNombre);
-		dlgNuevo.add(txtNombre);
+		dlgNuevo.add(lblEmpleadoNuevo);
+		dlgNuevo.add(txtEmpleadoNuevo);
+		dlgNuevo.add(lblDepartamentoNuevo);
+		dlgNuevo.add(listaDepartamentoNuevo);
+		dlgNuevo.add(lblExtensionNuevo);
+		dlgNuevo.add(txtExtensionNuevo);
+		dlgNuevo.add(lblFechaNacNuevo);
+		dlgNuevo.add(txtFechaIngNuevo);
+		dlgNuevo.add(lblSalarioNuevo);
+		dlgNuevo.add(txtSalarioNuevo);
+		dlgNuevo.add(lblComisionNuevo);
+		dlgNuevo.add(txtComisionNuevo);
+		dlgNuevo.add(lblHijosNuevo);
+		dlgNuevo.add(txtHijosNuevo);
+		dlgNuevo.add(lblNombreNuevo);
+		dlgNuevo.add(txtNombreNuevo);
 		
 		dlgNuevo.add(btnCrear);
-		dlgNuevo.add(btnCancelar);
+		dlgNuevo.add(btnCancelarNuevo);
 		
 		//Creamos ventana ModificarEmpleado
-		dlgModificar.setLayout (new FlowLayout());
-		dlgModificar.setTitle("Crear nuevo empleado");
-		dlgModificar.setSize(300,250);
+		dlgModificar.setLayout (new GridLayout(9, 2));
+		dlgModificar.setTitle("Editar empleado");
+		dlgModificar.setSize(275,250);
 		dlgModificar.setLocationRelativeTo(null);
 		dlgModificar.setResizable(false);
 		dlgModificar.setVisible(false);
-		dlgModificar.add(lblEmpleado);
-		dlgModificar.add(txtEmpleado);
-		dlgModificar.add(lblDepartamento);
-		dlgModificar.add(listaDepartamento);
-		dlgModificar.add(lblExtension);
-		dlgModificar.add(txtExtension);
-		dlgModificar.add(lblFechaNac);
-		dlgModificar.add(txtFechaIng);
-		dlgModificar.add(lblSalario);
-		dlgModificar.add(txtSalario);
-		dlgModificar.add(lblComision);
-		dlgModificar.add(txtComision);
-		dlgModificar.add(lblHijos);
-		dlgModificar.add(txtHijos);
-		dlgModificar.add(lblNombre);
-		dlgModificar.add(txtNombre);
+		dlgModificar.add(lblEmpleadoModificar);
+		dlgModificar.add(txtEmpleadoModificar);
+		dlgModificar.add(lblDepartamentoModificar);
+		dlgModificar.add(listaDepartamentoModificar);
+		dlgModificar.add(lblExtensionModificar);
+		dlgModificar.add(txtExtensionModificar);
+		dlgModificar.add(lblFechaNacModificar);
+		dlgModificar.add(txtFechaIngModificar);
+		dlgModificar.add(lblSalarioModificar);
+		dlgModificar.add(txtSalarioModificar);
+		dlgModificar.add(lblComisionModificar);
+		dlgModificar.add(txtComisionModificar);
+		dlgModificar.add(lblHijosModificar);
+		dlgModificar.add(txtHijosModificar);
+		dlgModificar.add(lblNombreModificar);
+		dlgModificar.add(txtNombreModificar);
 		
 		dlgModificar.add(btnModificar);
-		dlgModificar.add(btnCancelar);
+		dlgModificar.add(btnCancelarModificar);
 		
 		//Crear ventana borrarEmpleado
 		
 		dlgEliminar.setLayout (new FlowLayout());
 		dlgEliminar.setTitle("Crear nuevo empleado");
-		dlgEliminar.setSize(300,250);
+		dlgEliminar.setSize(350,350);
 		dlgEliminar.setLocationRelativeTo(null);
 		dlgEliminar.setResizable(false);
 		dlgEliminar.setVisible(false);
 		dlgEliminar.add(lblBorrar);
-		dlgEliminar.add(listaEmpleados);
-		dlgEliminar.add(btnModificar);
-		dlgEliminar.add(btnCancelar);
+		dlgEliminar.add(listaEmpleadosEliminar);
+		dlgEliminar.add(btnEliminar);
+		dlgEliminar.add(btnCancelarEliminar);
 		
 	
 	
 	}
-	public static void main(String[] args) {
-		new Vista();
-	}
+	
 }
