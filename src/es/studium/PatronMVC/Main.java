@@ -1,12 +1,13 @@
 package es.studium.PatronMVC;
 
-public class Principal {
+public class Main {
 
 	public static void main(String[] args) {
 		
-		Modelo modelo;
-		Vista vista;
-		new Controlador(modelo, vista);
+		Modelo modelo = new Modelo();
+		Vista vista = new Vista();
+		
+		new Controlador (vista, modelo);
 
 	}
 
