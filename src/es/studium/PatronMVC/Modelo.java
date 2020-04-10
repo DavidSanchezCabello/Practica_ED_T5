@@ -25,7 +25,7 @@ public class Modelo {
 		}
 	}
 
-	public void GestorConexion() {
+	public Connection GestorConexion() {
 
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/empresa?autoReconnect=true&useSSL=false";
@@ -38,13 +38,13 @@ public class Modelo {
 			Class.forName(driver);
 			// Establecer la conexión con la base de datos
 			connect = DriverManager.getConnection(url, login, pass);
-
+			
 			if (connect != null) {
 
 				System.out.println(" Conectado correctamente a la base de datos");
 
 			}
-
+			
 		} catch (SQLException ex) {
 
 			System.out.println("ERROR: No se ha podido conectar con la base de datos" + ex.getMessage());
@@ -54,6 +54,7 @@ public class Modelo {
 			System.out.println("No se encontró el controlador: " + error.getMessage());
 
 		}
+		return connect;
 
 	}
 	

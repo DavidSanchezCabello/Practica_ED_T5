@@ -2,9 +2,10 @@ package es.studium.PatronMVC;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Controlador implements ActionListener {
+public class Controlador extends WindowAdapter implements ActionListener {
 
 	Vista objVista = null;
 	Modelo objModelo = null;
@@ -16,15 +17,15 @@ public class Controlador implements ActionListener {
 
 		// Llamamos a los escuchadores de los objetos de la clase Vista
 
-		objVista.frmEmpresa.addWindowListener(objVista);
-		objVista.dlgNuevo.addWindowListener(objVista);
-		objVista.dlgModificar.addWindowListener(objVista);
-		objVista.dlgEliminar.addWindowListener(objVista);
-		objVista.dlgConsultar.addWindowListener(objVista);
+		objVista.frmEmpresa.addWindowListener(this);
+		objVista.dlgNuevo.addWindowListener(this);
+		objVista.dlgModificar.addWindowListener(this);
+		objVista.dlgEliminar.addWindowListener(this);
+		objVista.dlgConsultar.addWindowListener(this);
 
 		objVista.mniNuevo.addActionListener(this);
 		objVista.mniConsultar.addActionListener(this);
-		objVista.mniEliminar.addActionListener(null);
+		objVista.mniEliminar.addActionListener(this);
 		objVista.mniModificar.addActionListener(this);
 
 		// Añadimos los objetos botón
@@ -50,30 +51,23 @@ public class Controlador implements ActionListener {
 
 			objVista.dlgNuevo.setVisible(false);
 
-		}else if (objVista.dlgModificar.isActive()) {
-			
+		} else if (objVista.dlgModificar.isActive()) {
+
 			objVista.dlgModificar.setVisible(false);
-			
-		}else if (objVista.dlgEliminar.isActive()) {
-			
+
+		} else if (objVista.dlgEliminar.isActive()) {
+
 			objVista.dlgEliminar.setVisible(false);
-			
-		}else if (objVista.dlgConsultar.isActive()) {
-			
+
+		} else if (objVista.dlgConsultar.isActive()) {
+
 			objVista.dlgConsultar.setVisible(false);
-			
-		}else {
-			objVista.frmEmpresa.setVisible(false);
-			
+
+		} else {
+
+			System.exit(0);
+
 		}
-		// if (objVista.dlgNuevo.hasFocus()) {
-		//
-		// objVista.dlgNuevo.setVisible(false);
-		//
-		// }else {
-		// System.exit(0);
-		//
-		// }
 
 	}
 
@@ -83,11 +77,20 @@ public class Controlador implements ActionListener {
 
 			objVista.dlgNuevo.setVisible(true);
 
+		}
+		if (objVista.btnCrear.equals(event.getSource())) {
+
 		} else if (objVista.mniModificar.equals(event.getSource())) {
 
 			objVista.dlgModificar.setVisible(true);
 
+		} else if (objVista.btnConsultar.equals(event.getSource())) {
+
+			objVista.dlgConsultar.setVisible(false);
+
 		} else if (objVista.mniConsultar.equals(event.getSource())) {
+			
+			objModelo.ConsultaEmpleados(objModelo.GestorConexion(), objVista.txtAreaConsultar);			
 
 			objVista.dlgConsultar.setVisible(true);
 
@@ -98,5 +101,4 @@ public class Controlador implements ActionListener {
 		}
 
 	}
-
 }
