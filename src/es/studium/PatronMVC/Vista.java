@@ -50,7 +50,7 @@ public class Vista extends WindowAdapter {
 	
 	//Etiquetas Nuevo
 	Label lblNombreNuevo = new Label ("Nombre Empleado:");
-	Label lblEmpleadoNuevo = new Label ("Número Empleado:");
+	
 	Label lblDepartamentoNuevo = new Label ("Departamento:");
 	Label lblExtensionNuevo = new Label ("Extensión:");
 	Label lblFechaNacNuevo = new Label ("Fecha Nac.:");
@@ -63,7 +63,7 @@ public class Vista extends WindowAdapter {
 	
 	Label lblNombreModificar = new Label ("Nombre Empleado:");
 	Label lblEmpleadoModificar = new Label ("Número Empleado");
-	Label lblDepartamentoModificar = new Label ("Departamento");
+	
 	Label lblExtensionModificar = new Label ("Extensión");
 	Label lblFechaNacModificar = new Label ("Fecha Nacimiento");
 	Label lblFechaIngModificar = new Label ("Fecha Alta");
@@ -76,7 +76,7 @@ public class Vista extends WindowAdapter {
 	
 	
 	TextField txtNombreNuevo = new TextField ("",20);
-	TextField txtEmpleadoNuevo = new TextField ("",20);
+	
 	
 	TextField txtExtensionNuevo = new TextField ("",20);
 	TextField txtFechaNacNuevo = new TextField ("",20);
@@ -88,13 +88,13 @@ public class Vista extends WindowAdapter {
 	//Objetos Choice
 		//nuevo
 	Choice listaEmpleadosNuevo = new Choice();
-	Choice listaDepartamentosNuevo = new Choice();
+	
 		//eliminar
-	Choice listaEmpleadosEliminar = new Choice();
-	Choice listaDepartamentoNuevo = new Choice();
-		//modificar
+	Choice listaEmpleadoEliminar = new Choice();
+	
+	//modificar
 	Choice listaEmpleadosModificar = new Choice();
-	Choice listaDepartamentoModificar = new Choice ();
+	
 
 	//Creamos los campos de texto NuevoEmpleado
 	
@@ -146,18 +146,17 @@ public class Vista extends WindowAdapter {
 		
 		//Creamos interfaz ventana NuevoEmpleado
 		
-		dlgNuevo.setLayout (new GridLayout(10, 2));
+		dlgNuevo.setLayout (new GridLayout(8, 2));
 		dlgNuevo.setTitle("Crear nuevo empleado");
 		dlgNuevo.setSize(300,275);
 		dlgNuevo.setLocationRelativeTo(null);
 		dlgNuevo.setResizable(false);
 		dlgNuevo.setVisible(false);
-		dlgNuevo.add(lblEmpleadoNuevo);
-		dlgNuevo.add(txtEmpleadoNuevo);
-		dlgNuevo.add(lblDepartamentoNuevo);
-		dlgNuevo.add(listaDepartamentoNuevo);
-		dlgNuevo.add(lblExtensionNuevo);
-		dlgNuevo.add(txtExtensionNuevo);
+		
+		
+		
+		dlgNuevo.add(lblNombreNuevo);
+		dlgNuevo.add(txtNombreNuevo);
 		dlgNuevo.add(lblFechaNacNuevo);
 		dlgNuevo.add(txtFechaNacNuevo);
 		dlgNuevo.add(lblFechaIngNuevo);
@@ -167,15 +166,15 @@ public class Vista extends WindowAdapter {
 		dlgNuevo.add(lblComisionNuevo);
 		dlgNuevo.add(txtComisionNuevo);
 		dlgNuevo.add(lblHijosNuevo);
-		dlgNuevo.add(txtHijosNuevo);
-		dlgNuevo.add(lblNombreNuevo);
-		dlgNuevo.add(txtNombreNuevo);
+		dlgNuevo.add(txtHijosNuevo);		
+		dlgNuevo.add(lblExtensionNuevo);
+		dlgNuevo.add(txtExtensionNuevo);
 		
 		dlgNuevo.add(btnCrear);
 		dlgNuevo.add(btnCancelarNuevo);
 		
 		//Creamos ventana ModificarEmpleado
-		dlgModificar.setLayout (new GridLayout(10, 2));
+		dlgModificar.setLayout (new GridLayout(9, 2));
 		dlgModificar.setTitle("Editar empleado");
 		dlgModificar.setSize(300,275);
 		dlgModificar.setLocationRelativeTo(null);
@@ -183,8 +182,8 @@ public class Vista extends WindowAdapter {
 		dlgModificar.setVisible(false);
 		dlgModificar.add(lblEmpleadoModificar);
 		dlgModificar.add(txtEmpleadoModificar);
-		dlgModificar.add(lblDepartamentoModificar);
-		dlgModificar.add(listaDepartamentoModificar);
+		
+		
 		dlgModificar.add(lblExtensionModificar);
 		dlgModificar.add(txtExtensionModificar);
 		dlgModificar.add(lblFechaNacModificar);
@@ -205,14 +204,14 @@ public class Vista extends WindowAdapter {
 		
 		//Creamos la ventana borrarEmpleado
 		
-		dlgEliminar.setLayout (new GridLayout(2, 2));
-		dlgEliminar.setTitle("Crear nuevo empleado");
-		dlgEliminar.setSize(250,150);
+		dlgEliminar.setLayout (new GridLayout(2, 1));
+		dlgEliminar.setTitle("Borrar empleado");
+		dlgEliminar.setSize(450,75);
 		dlgEliminar.setLocationRelativeTo(null);
 		dlgEliminar.setResizable(false);
 		dlgEliminar.setVisible(false);
 		dlgEliminar.add(lblBorrar);
-		dlgEliminar.add(listaEmpleadosEliminar);
+		dlgEliminar.add(listaEmpleadoEliminar);
 		dlgEliminar.add(btnEliminar);
 		dlgEliminar.add(btnCancelarEliminar);
 		
@@ -224,11 +223,12 @@ public class Vista extends WindowAdapter {
 		dlgConsultar.setLocationRelativeTo(null);
 		dlgConsultar.setResizable(false);
 		dlgConsultar.setVisible(false);
+		txtAreaConsultar.setEditable(false);
 		dlgConsultar.add(lblConsultar);
 		dlgConsultar.add(txtAreaConsultar);
 		dlgConsultar.add(btnConsultar);
 		dlgConsultar.add(btnCancelarConsultar);
-		txtAreaConsultar.setEditable(false);
+		
 		
 	
 	}

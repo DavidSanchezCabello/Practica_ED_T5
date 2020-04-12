@@ -1,5 +1,6 @@
 package es.studium.PatronMVC;
 
+import java.awt.Choice;
 import java.awt.TextArea;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 public class Modelo {
 
 	Connection connect = null;
+	
 
 	public void CerrarConexion() {
 
@@ -58,7 +60,7 @@ public class Modelo {
 
 	}
 	
-	public int insertar(Connection con, String tabla, String departamentoFK, String extensionEmpleado, String fechaNacimientoEmpleado, 
+	public int insertar(Connection con, String tabla,  String extensionEmpleado, String fechaNacimientoEmpleado, 
 			String fechaIngresoEmpleado, String salarioEmpleado, String comisionEmpleado, String hijosEmpleado, String nombreEmpleado)
 	{
 		int respuesta = 0;
@@ -68,8 +70,8 @@ public class Modelo {
 			// Creamos un STATEMENT para una consulta SQL INSERT.
 			Statement statement = con.createStatement();
 			
-			String cadenaSQL = "INSERT INTO " + tabla + " VALUES (null, '" 
-				+ departamentoFK + "', '" + extensionEmpleado +  " ', '" + fechaNacimientoEmpleado + "', '" 
+			String cadenaSQL = "INSERT INTO " + tabla + " VALUES (null, null ,'" 
+				+ extensionEmpleado +  " ', '" + fechaNacimientoEmpleado + "', '" 
 				+ fechaIngresoEmpleado + "', '" + salarioEmpleado + "', '" + comisionEmpleado + "', '" 
 				+ hijosEmpleado + "', '" + nombreEmpleado + "');";
 				System.out.println(cadenaSQL);
@@ -86,11 +88,14 @@ public class Modelo {
 		return respuesta;
 	}
 	
-	public int borrar(Connection con, int idEmpleado)
+	public int BorrarEmpleado(Connection con, int idEmpleado)
+	
 	{
 		int respuesta = 0;
 		String sql = "DELETE FROM empleados WHERE idEmpleado = " + idEmpleado;
 		System.out.println(sql);
+		
+		
 		try
 		{
 			// Creamos un STATEMENT para una consulta SQL INSERT.
@@ -139,4 +144,28 @@ public class Modelo {
 			ex.printStackTrace();
 		}
 	}
+	
+		public Choice SelectEmpleado (Connection con, Choice listaEmpleadoEliminar) {
+			
+				
+			String statement = "SELECT * FROM empleados";
+			try
+			{	
+				
+				// CREAR UN STATEMENT PARA UNA CONSULTA SELECT
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(statement);
+				while (rs.next())
+				{
+					listaEmpleadoEliminar.add(rs.getInt("idEmpleado")+ "- " + rs.getString("nombreEmpleado") + ", " + rs.getString("extensionEmpleado") + ", "
+							
+							+ rs.getString("salarioEmpleado")); 
+					
+				}
+			}catch (SQLException error) {
+				
+				System.out.println("Se ha producido un error");
+			}
+			return listaEmpleadoEliminar;
+		}
 }

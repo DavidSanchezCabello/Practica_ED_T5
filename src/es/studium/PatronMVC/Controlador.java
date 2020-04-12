@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+
+
 public class Controlador extends WindowAdapter implements ActionListener {
 
 	Vista objVista = null;
@@ -77,8 +79,24 @@ public class Controlador extends WindowAdapter implements ActionListener {
 
 			objVista.dlgNuevo.setVisible(true);
 
-		}
-		if (objVista.btnCrear.equals(event.getSource())) {
+		} else if (objVista.btnCrear.equals(event.getSource())) {
+
+			int respuesta = objModelo.insertar(objModelo.GestorConexion(), "empleados",
+					objVista.txtExtensionNuevo.getText(), objVista.txtFechaNacNuevo.getText(),
+					objVista.txtFechaIngNuevo.getText(), objVista.txtSalarioNuevo.getText(),
+					objVista.txtComisionNuevo.getText(), objVista.txtHijosNuevo.getText(),
+					objVista.txtNombreNuevo.getText());
+
+			// Mostrar el resultado
+			if ((respuesta == 0)) {
+				System.out.println("ALTA de habitación correcta");
+			} else {
+				System.out.println("Error en ALTA de habitación");
+			}
+
+		} else if (objVista.btnCancelarNuevo.equals(event.getSource())) {
+
+			objVista.dlgNuevo.setVisible(false);
 
 		} else if (objVista.mniModificar.equals(event.getSource())) {
 
@@ -89,16 +107,48 @@ public class Controlador extends WindowAdapter implements ActionListener {
 			objVista.dlgConsultar.setVisible(false);
 
 		} else if (objVista.mniConsultar.equals(event.getSource())) {
-			
-			objModelo.ConsultaEmpleados(objModelo.GestorConexion(), objVista.txtAreaConsultar);			
+
+			objModelo.ConsultaEmpleados(objModelo.GestorConexion(), objVista.txtAreaConsultar);
+
+			objModelo.CerrarConexion();
 
 			objVista.dlgConsultar.setVisible(true);
 
 		} else if (objVista.mniEliminar.equals(event.getSource())) {
-
+			
+			
+			objVista.listaEmpleadoEliminar = objModelo.SelectEmpleado(objModelo.GestorConexion(), objVista.listaEmpleadoEliminar);	
+			
+			
 			objVista.dlgEliminar.setVisible(true);
 
+		}else if (objVista.btnEliminar.equals(event.getSource())) {
+			
+			//Hacemos un split para aislar el dato idEmpleado
+			String[] empleado = objVista.listaEmpleadoEliminar.getSelectedItem().split("-");
+			
+			//Guardamos el resultado que nos devuelve el método BorrarEmpleado en la cvariable respuesta
+			int respuesta = objModelo.BorrarEmpleado(objModelo.GestorConexion(), Integer.parseInt(empleado[0]));
+			
+			// Mostramos resultado 
+			if (respuesta == 0)
+			{
+				System.out.println("Borrado de empleado correcto");
+				
+			} else
+			{
+				System.out.println("Error en Borrado de empleado");
+			}
+				objModelo.CerrarConexion();
+			
+			
+		}else if (objVista.btnCancelarEliminar.equals(event.getSource())) {
+			
+				objModelo.CerrarConexion();
+				objVista.dlgEliminar.setVisible(false);
+				
 		}
 
 	}
+	
 }
